@@ -17,6 +17,8 @@ using System.Reflection;
 using System.IO;
 using BookStoreAPI.Contracts;
 using BookStoreAPI.Services;
+using AutoMapper;
+using BookStoreAPI.Mappings;
 
 namespace BookStoreAPI
 {
@@ -46,6 +48,8 @@ namespace BookStoreAPI
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+
+            services.AddAutoMapper(typeof(Maps));
             
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo 
