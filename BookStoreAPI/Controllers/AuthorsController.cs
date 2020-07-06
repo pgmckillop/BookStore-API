@@ -161,6 +161,7 @@ namespace BookStoreAPI.Controllers
                     _logger.LogWarn("Author update failed");
                     return BadRequest(ModelState);
                 }
+
                 var author = _mapper.Map<Author>(authorDTO);
                 var isSuccess = await _authorRepository.Update(author);
                 if (!isSuccess)
@@ -178,24 +179,32 @@ namespace BookStoreAPI.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Delete an author
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
+            
             try
             {
-                _logger.LogInfo($"Author delete attempted - id { id }");
+                _logger.LogInfo($"Delete attempted - id { id }");
                 if (id < 1)
                 {
-                    _logger.LogWarn("Author update failed id wrong");
+                    _logger.LogWarn("Delete failed id wrong");
                     return BadRequest();
                 }
                 var isExists = await _authorRepository.IsExists(id);
                 if (!isExists)
                 {
-                    _logger.LogWarn("Author update failed author not found");
+                    _logger.LogWarn("Delete failed record not found");
                     return NotFound();
                 }
                 var author = await _authorRepository.FindById(id);
@@ -204,7 +213,7 @@ namespace BookStoreAPI.Controllers
                 {
                     return InternalError($"Delete operation failed for id { id }");
                 }
-                _logger.LogInfo($"Deleted author with id - { id }");
+                _logger.LogInfo($"Deleted record with id - { id }");
                 return NoContent();
             }
             catch (Exception e)
@@ -214,11 +223,18 @@ namespace BookStoreAPI.Controllers
             }
         }
 
+        private string GetControllerActionNames()
+        {
+            var controller = ControllerContext.ActionDescriptor.ControllerName;
+            var action = ControllerContext.ActionDescriptor.ActionName;
 
-            private ObjectResult InternalError(string message)
+            return $"{controller} - {action}";
+        }
+
+        private ObjectResult InternalError(string message)
         {
             _logger.LogError(message);
-            return StatusCode(500, "Something went wrong getting Author with id: {id}");
+            return StatusCode(500, "Something went wrong");
         }
     }
 }

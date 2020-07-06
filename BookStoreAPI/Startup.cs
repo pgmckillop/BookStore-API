@@ -61,12 +61,13 @@ namespace BookStoreAPI
 
                 var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
+                
                 c.IncludeXmlComments(xpath);
             });
 
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
-            
+            services.AddScoped<IBookRepository, BookRepository>();
             services.AddControllers();
 
         }

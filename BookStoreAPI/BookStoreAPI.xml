@@ -37,6 +37,53 @@
             <param name="authorDTO"></param>
             <returns></returns>
         </member>
+        <member name="M:BookStoreAPI.Controllers.AuthorsController.Delete(System.Int32)">
+            <summary>
+            Delete an author
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BookStoreAPI.Controllers.BooksController">
+            <summary>
+            Intaction with Books table
+            </summary>
+        </member>
+        <member name="M:BookStoreAPI.Controllers.BooksController.GetBooks">
+            <summary>
+            Get all books
+            </summary>
+            <returns>List of books</returns>
+        </member>
+        <member name="M:BookStoreAPI.Controllers.BooksController.GetBook(System.Int32)">
+            <summary>
+            Get a book with an Id
+            </summary>
+            <param name="id"></param>
+            <returns>Book record</returns>
+        </member>
+        <member name="M:BookStoreAPI.Controllers.BooksController.Create(BookStoreAPI.DTOs.BookCreateDTO)">
+            <summary>
+            Create a new book
+            </summary>
+            <param name="bookDTO"></param>
+            <returns>Book object</returns>
+        </member>
+        <member name="M:BookStoreAPI.Controllers.BooksController.Update(System.Int32,BookStoreAPI.DTOs.BookUpdateDTO)">
+            <summary>
+            Update a book
+            </summary>
+            <param name="id"></param>
+            <param name="bookDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStoreAPI.Controllers.BooksController.Delete(System.Int32)">
+            <summary>
+            Delete a book
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:BookStoreAPI.Controllers.HomeController">
             <summary>
             Test controller called Home
